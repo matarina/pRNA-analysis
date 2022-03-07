@@ -1,0 +1,1 @@
+trim_galore --phred33 -q 20 --length 20 -o ~/trimmed_data/ ~/prna/293T_wuq/SRR8571185.fastq.gz 
