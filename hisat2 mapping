@@ -10,4 +10,5 @@ Multiseed full-index search: 00:07:25
 79.30% overall alignment rate
 Time searching: 00:07:44
 Overall time: 00:14:11
-samtools sort SRR8571185.sam -o SRR8571185_sorted.bam -@ 18
+samtools sort SRR8571185.sam -o SRR8571185_sorted.sam -@ 18 
+samtools view -S ./SRR8571185_sorted.sam -b > ./SRR8571185_sorted.bam
