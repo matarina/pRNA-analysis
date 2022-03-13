@@ -12,3 +12,5 @@ Time searching: 00:07:44
 Overall time: 00:14:11
 samtools sort SRR8571185.sam -o SRR8571185_sorted.sam -@ 18 
 samtools view -S ./SRR8571185_sorted.sam -b > ./SRR8571185_sorted.bam
+tophat2 --library-type=fr-firststrand -p 18   -o ~/tophat2_index/ ~/tophat2_index/hg19 SRR8571185_trimmed.fq
+cuffdiff -o ~/cuffdiff_up1000bp/ -p 18 -b ~/ucsc_genome_gtf/hg38.fa -library-type fr-firststrand ~/ucsc_up1000_bed_fa/ucsc_up1000.gtf ~/tophat2_index/accepted_hits.bam ~/mapped_result/SRR8571187/SRR8571187_accepted_hits.bam
