@@ -50,3 +50,5 @@ In valid.GenomicRanges.seqinfo(x, suggest.trim = TRUE) :
   located on a sequence whose length is unknown (NA) or on a circular sequence are not considered out-of-bound (use seqlengths() and
   isCircular() to get the lengths and circularity flags of the underlying sequences). You can use trim() to trim these ranges. See
   ?`trim,GenomicRanges-method` for more information.
+  #查找文件并删除
+  find . -name "*.bam" | xargs rm -rf
