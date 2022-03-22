@@ -17,7 +17,7 @@ Overall time: 00:14:11
 #sam排序转bam
 samtools sort -o ~/mapped_result/SRR8571187sorted.bam -O bam -@ 12 ~/mapped_result/SRR8571185.sam
 #批量转换命令
-for i in *.sam; do samtools sort -o ./$i.bam -O bam -@ 4 ./$i ;done
+for i in *.sam; do echo "nohup samtools sort -o ./$i.bam -O bam -@ 4 ./$i & " | bash;done
 
 #tophat2比对
 tophat2 --library-type=fr-firststrand -p 18   -o ~/tophat2_index/ ~/tophat2_index/hg19 SRR8571185_trimmed.fq
