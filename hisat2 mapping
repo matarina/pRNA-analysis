@@ -53,3 +53,5 @@ In valid.GenomicRanges.seqinfo(x, suggest.trim = TRUE) :
   ?`trim,GenomicRanges-method` for more information.
   #查找文件并删除
   find . -name "*.bam" | xargs rm -rf
+#bed文件求交集 
+bedops --not-element-of 1 sorted.bed sorted2.bed > result.bed
