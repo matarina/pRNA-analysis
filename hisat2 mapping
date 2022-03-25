@@ -57,3 +57,5 @@ In valid.GenomicRanges.seqinfo(x, suggest.trim = TRUE) :
 bedops --not-element-of 1 sorted.bed sorted2.bed > result.bed
 #UCSCbed文件转genepred genepred转gtf
 bedToGenePred input.bed input.GenePred   genePredToGtf file input.GenePred input.gtf
+#stringtie转录组定量，不组装新的转录组
+stringtie --rf -e -A ./SRR8571185.tab -C SRR8571185.gtf  -p 16 -G ../ucsc_up1000_bed_fa/up1000_txdb_cds_deletion.gtf -C ~/prna_transcript_analysis/string_count/cov.gtf ../hisat2_mapped_data/293T_wuq/SRR8571185.sam.bam
