@@ -41,3 +41,6 @@ GENE_ANNO_GTF = system.file("extdata", "/home/ma/ucsc_genome_gtf/human_ucsc.gtf"
 > f1 = system.file("extdata", "/home/ma/prna_merip_data_analysis/hisat2_mapped/hela_ip_rep1.sam.bam", package="exomePeak2")
 > f2 = system.file("extdata", "/home/ma/prna_merip_data_analysis/hisat2_mapped/hela_input_rep1.sam.bam", package="exomePeak2")
 > sep = exomePeak2(bam_ip=f1,bam_input=f2,txdb=x,genome="hg38",paired_end=TRUE)
+
+#pip临时指定安装源
+pip install ** -i https://pypi.tuna.tsinghua.edu.cn/simple
