@@ -44,3 +44,6 @@ GENE_ANNO_GTF = system.file("extdata", "/home/ma/ucsc_genome_gtf/human_ucsc.gtf"
 
 #pip临时指定安装源
 pip install ** -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+#bed文件交集venn图
+intervene venn -i cds.bed promoters_unfiltered.bed
