@@ -37,6 +37,7 @@ bedops --not-element-of 1 sorted.bed sorted2.bed > result.bed
 bedToGenePred input.bed input.GenePred   genePredToGtf file input.GenePred input.gtf
 #stringtie转录组定量，不组装新的转录组
 stringtie --rf -e -A ./SRR8571185.tab -C SRR8571185.gtf  -p 16 -G ../ucsc_up1000_bed_fa/up1000_txdb_cds_deletion.gtf -C ~/prna_transcript_analysis/string_count/cov.gtf ../hisat2_mapped_data/293T_wuq/SRR8571185.sam.bam
+#R包exomepeak2 call peak
 GENE_ANNO_GTF = system.file("extdata", "/home/ma/ucsc_genome_gtf/human_ucsc.gtf", package="exomePeak2")
 > f1 = system.file("extdata", "/home/ma/prna_merip_data_analysis/hisat2_mapped/hela_ip_rep1.sam.bam", package="exomePeak2")
 > f2 = system.file("extdata", "/home/ma/prna_merip_data_analysis/hisat2_mapped/hela_input_rep1.sam.bam", package="exomePeak2")
