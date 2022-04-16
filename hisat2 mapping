@@ -47,3 +47,5 @@ pip install ** -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 #bed文件交集venn图
 intervene venn -i cds.bed promoters_unfiltered.bed
+#提取bed文件正链
+grep '+' promoters_unfiltered.bed > promoters_unfiltered_plus.bed
