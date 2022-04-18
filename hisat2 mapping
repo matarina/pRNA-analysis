@@ -6,16 +6,7 @@ trim_galore --phred33 -q 20 -j 18 --length 20 -o ~/trimmed_data/ ~/prna/293T_wuq
 #hisat2比对
 Time loading forward index: 00:06:26
 hisat2 --dta -t -x ~/hisat2_index/grch38/genome -U ~/trimmed_data/SRR8571185_trimmed.fq.gz -S ~/mapped_result/SRR8571185.sam -p 16 
-Time loading reference: 00:00:18
-Multiseed full-index search: 00:07:25
-15355243 reads; of these:
-  15355243 (100.00%) were unpaired; of these:
-    3178487 (20.70%) aligned 0 times
-    10983371 (71.53%) aligned exactly 1 time
-    1193385 (7.77%) aligned >1 times
-79.30% overall alignment rate
-Time searching: 00:07:44
-Overall time: 00:14:11
+
 #sam排序转bam
 samtools sort -o ~/mapped_result/SRR8571187sorted.bam -O bam -@ 12 ~/mapped_result/SRR8571185.sam
 #批量转换命令
