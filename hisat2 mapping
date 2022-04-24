@@ -20,6 +20,8 @@ cufflinks -o ~/cufflink_cuffdiff/cufflink_ucsc_up1000/ -p 18 -G ~/ucsc_genome_gt
 
 #查找文件并删除
   find . -name "*.bam" | xargs rm -rf
+ #查找文件并移动
+ find . -name "*.bam" -exec mv '{}' ~/prna_transcript_analysis/hisat2_mapped_data/ \;
 #bedops中的bed文件排序功能
 sort-bed unsortedData.bed > sortedData.bed
 #bed文件求交集 
