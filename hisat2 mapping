@@ -45,3 +45,7 @@ pip install ** -i https://pypi.tuna.tsinghua.edu.cn/simple
 intervene venn -i cds.bed promoters_unfiltered.bed
 #提取bed文件正链
 grep '+' promoters_unfiltered.bed > promoters_unfiltered_plus.bed
+##shell申请变量，把相应文件移到对应的文件夹里
+for file in $(grep "SRR" sample.text);do mv $file.sam.bam* $file;done
+##提取文件名到文本里面后提取文件名为变量并创建文件夹
+for file in $(grep "SRR" sample.text);do mkdir $file;done
