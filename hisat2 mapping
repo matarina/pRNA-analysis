@@ -32,6 +32,7 @@ bedToGenePred input.bed input.GenePred   genePredToGtf file input.GenePred input
 stringtie --rf -e -A ./SRR8571185.tab -C SRR8571185.gtf  -p 16 -G ../ucsc_up1000_bed_fa/up1000_txdb_cds_deletion.gtf -C ~/prna_transcript_analysis/string_count/cov.gtf ../hisat2_mapped_data/293T_wuq/SRR8571185.sam.bam
 stringtie --rf -e  -A ~/prna_transcript_analysis/stringtie_count/mrna_count/293T_wuq/293T_0h_B.tab  -p 16 -G  ~/prna_transcript_analysis/ucsc_up1000_bed_fa/promoter_filtered.gtf  -o ~/prna_transcript_analysis/stringtie_count/mrna_count/293T_wuq/293T_0h_B.tab
 ~/prna_transcript_analysis/hisat2_mapped_data/293T_wuq/SRR8571186.sam.bam
+for i in *.bam;do stringtie --rf -e -A ~/prna_transcript_analysis/ercc/count_ercc/$i.tab -p 16 -G ~/prna_transcript_analysis/ercc/ercc_index/ERCC92.genes.patched.gtf -o ~/prna_transcript_analysis/ercc/count_ercc/$i.gtf ./$i
 #R包exomepeak2 call peak
 GENE_ANNO_GTF = system.file("extdata", "/home/ma/ucsc_genome_gtf/human_ucsc.gtf", package="exomePeak2")
 > f1 = system.file("extdata", "/home/ma/prna_merip_data_analysis/hisat2_mapped/hela_ip_rep1.sam.bam", package="exomePeak2")
