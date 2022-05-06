@@ -54,3 +54,6 @@ for file in $(grep "SRR" sample.text);do mkdir $file;done
 find . -name '*.gz' -exec cp -v -- {} ./ \;
 ##查看reads平均长度
 awk '{if(NR%4==2) {count++; bases += length} } END{print bases/count}' <fastq_file>
+
+##homer find motif
+findMotifsGenome.pl ~/merip_prna/exome_callpeak/Mod.bed hg38 ~/merip_prna/exome_callpeak/ -size -100,100 -len 5,6,7 -mis 1 -p 10
