@@ -58,3 +58,18 @@ awk '{if(NR%4==2) {count++; bases += length} } END{print bases/count}' <fastq_fi
 ##homer find motif
 findMotifsGenome.pl ~/merip_prna/exome_callpeak/Mod.bed hg38 ~/merip_prna/exome_callpeak/ -size -100,100 -len 5,6,7 -mis 1 -p 10 -rna
 egrep  '(ENST[0-9]{11}\.[0-9]{,2}|ENST[0-9]{11})' -o Mod.csv  | wc -l
+
+##多任务双端测序比对脚本
+# Runs of .gz files 
+total_files=`find -name '*.gz' | wc -l`
+arr=( $(ls *.gz) )
+
+#alignment
+
+for ((i=0; i<$total_files; i+=2))
+{
+sample_name=`echo ${arr[$i]} | awk -F "_1" '{print $1}'`
+echo "[Hisat mapping running for sample] $sample_name"
+date && time hisat2 --dta -p 16 -x ~/index/hisat2_index/ucsc_hg38/genome -1 ${arr[$i]} -2 ${arr[$i+1]} -S $sample_name.sam
+printf "\n\n"
+}
