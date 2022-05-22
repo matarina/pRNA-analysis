@@ -78,5 +78,10 @@ date && time hisat2 --dta -p 16 -x ~/index/hisat2_index/ucsc_hg38/genome -1 ${ar
 printf "\n\n"
 }
 
-##提取想应的注释文件细分种类
-awk '$3 == "exon"' gencode.v40.annotation.gtf | egrep  '(ENST[0-9]{11}\.[0-9]{,2}|ENST[0-9]{11})' -o | cut -f1 -d '.' | sort | uniq > mrna_annotation.csv
+
+##查看gtf注释文件中有多少种转录本
+cut -f10 -d '"' transcripts.gtf | sort | uniq
+##提取相应的注释文件细分种类
+ awk '$3 == "transcript"' gencode.v40.annotation.gtf > transcripts.gtf
+grep 'transcript_type "protein_coding"' transcripts.gtf > protein_coding_transcripts.gtf
+egrep  '(ENST[0-9]{11}\.[0-9]{,2}|ENST[0-9]{11})' -o protein_coding_transcripts.gtf | cut -f1 -d '.' | sort | uniq > mrna_annotation.csv
