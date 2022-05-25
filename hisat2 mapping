@@ -85,3 +85,5 @@ cut -f10 -d '"' transcripts.gtf | sort | uniq
  awk '$3 == "transcript"' gencode.v40.annotation.gtf > transcripts.gtf
 grep 'transcript_type "protein_coding"' transcripts.gtf > protein_coding_transcripts.gtf
 egrep  '(ENST[0-9]{11}\.[0-9]{,2}|ENST[0-9]{11})' -o protein_coding_transcripts.gtf | cut -f1 -d '.' | sort | uniq > mrna_annotation.csv
+#get protein coding transcripts 
+awk '{if($3=="transcript" && $20=="\"protein_coding\";"){print $0}}' gencode.gtf
