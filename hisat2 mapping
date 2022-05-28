@@ -80,8 +80,8 @@ printf "\n\n"
 
 
 ##macs2 callpeak 
-macs2 callpeak --extsize 110 --nomodel --slocal 200 -t ${samp}-C.sorted.bam -c ${samp}-IP.sorted.bam -f BAM -g 3e9 -n  ${samp}/${samp}_q_0.05.m6A -B -q 0.05 --buffer-size 50000
-done
+macs2 callpeak --extsize 110 --nomodel --slocal 200 -t shNC-IP.markdup.sorted.bam -c shNC-input.markdup.sorted.bam -f BAM -g hs -n macs2 -B -p 0.01 --buffer-size 50000 --outdir ~/merip_prna/macs2/ 
+
 
 
 ##查看gtf注释文件中有多少种转录本
