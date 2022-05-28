@@ -79,6 +79,11 @@ printf "\n\n"
 }
 
 
+##macs2 callpeak 
+macs2 callpeak --extsize 110 --nomodel --slocal 200 -t ${samp}-C.sorted.bam -c ${samp}-IP.sorted.bam -f BAM -g 3e9 -n  ${samp}/${samp}_q_0.05.m6A -B -q 0.05 --buffer-size 50000
+done
+
+
 ##查看gtf注释文件中有多少种转录本
 cut -f10 -d '"' transcripts.gtf | sort | uniq
 ##提取相应的注释文件细分种类
