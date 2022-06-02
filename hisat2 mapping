@@ -92,3 +92,8 @@ grep 'transcript_type "protein_coding"' transcripts.gtf > protein_coding_transcr
 egrep  '(ENST[0-9]{11}\.[0-9]{,2}|ENST[0-9]{11})' -o protein_coding_transcripts.gtf | cut -f1 -d '.' | sort | uniq > mrna_annotation.csv
 #get protein coding transcripts 
 awk '{if($3=="transcript" && $20=="\"protein_coding\";"){print $0}}' gencode.gtf
+
+##EPD promoter_annotation 
+bedtools flank -i xx.bed -g chromesize -l 1000 -r 0
+bedtools intersect -a epd_promoter.bed -b cds.bed -v -s > filtered.bed
+
