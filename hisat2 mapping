@@ -99,5 +99,7 @@ bedtools intersect -a epd_promoter.bed -b cds.bed -v -s > filtered.bed
 
 ##提取promoter反义链的注释
 grep '\-$' epd_promoter.bed > minus_epd_promoter.bed
+awk  -F'\t' '/\t\-.$/{print $0}' promoters_ucsc_hg38_knowgene.bed > minus_promoter.bed##减号后面有一个空白字符，无法理解
 cut -f6  minus_epd_promoter.bed | sort  |uniq
 sed  -i  's/\-$/+/' minus_epd_promoter.bed
+sed  -i  's/\t\-.$/\t\+/'  minus_promoter.bed
