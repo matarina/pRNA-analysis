@@ -103,3 +103,11 @@ awk  -F'\t' '/\t\-.$/{print $0}' promoters_ucsc_hg38_knowgene.bed > minus_promot
 cut -f6  minus_epd_promoter.bed | sort  |uniq
 sed  -i  's/\-$/+/' minus_epd_promoter.bed
 sed  -i  's/\t\-.$/\t\+/'  minus_promoter.bed
+
+##提取第一行并两端加上引号
+awk -F \t  '{print "\""$1"\""}' stablegene1
+
+
+
+
+
