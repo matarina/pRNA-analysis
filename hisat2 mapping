@@ -82,7 +82,8 @@ printf "\n\n"
 ##macs2 callpeak 
 macs2 callpeak --extsize 110 --nomodel --slocal 200 -t shNC-IP.markdup.sorted.bam -c shNC-input.markdup.sorted.bam -f BAM -g hs -n macs2 -B -p 0.01 --buffer-size 50000 --outdir ~/merip_prna/macs2/ 
 
-
+##ascp download data from ena , replace the part after "vol1"
+ascp -QT -l 300m -P 33001 -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh era-fasp@fasp.sra.ebi.ac.uk:/vol1/fastq/SRR944/SRR944646/SRR944646.fastq.gz ./
 
 ##查看gtf注释文件中有多少种转录本
 cut -f10 -d '"' transcripts.gtf | sort | uniq
