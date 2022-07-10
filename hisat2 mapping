@@ -110,8 +110,9 @@ awk -F \t  '{print "\""$1"\""","}' stablegene1
 
 
 ###epd_promoter annotation build 
-faidx hg38.fa -i chromsizes > sizes.genome ###get genome size 
-bedtools flank  -i human_epd_tss_represent.bed -g sizes.genome -l 1000 -r 0 -s  > epd_promoter.bed 
+faidx hg38.fa -i chromsizes > sizes.genome ###get genome size  
+bedtools flank  -i human_epd_tss_represent.bed -g sizes.genome -l 1000 -r 0 -s  > epd_promoter.bed  ## from tss to 1000bp promoter region
+awk '$3 == "CDS" {print $0}' hg38.knownGene.gtf  > hg38_knowngene_CDS.gtf ### get cds region from gtf
 
 
 
