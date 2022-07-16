@@ -115,7 +115,8 @@ bedtools flank  -i human_epd_tss_represent.bed -g sizes.genome -l 1000 -r 0 -s  
 awk '$3 == "CDS" {print $0}' hg38.knownGene.gtf  > hg38_knowngene_CDS.gtf ### get cds region from gtf
 
 
-
+sortmerna中断后下一个为ENCFF371BBE
+ 估计跳过的为ENCFF365HXR的样本
 
 
 
