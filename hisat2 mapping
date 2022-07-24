@@ -118,5 +118,7 @@ awk '$3 == "CDS" {print $0}' hg38.knownGene.gtf  > hg38_knowngene_CDS.gtf ### ge
 sortmerna中断后下一个为ENCFF371BBE
  估计跳过的为ENCFF365HXR的样本
 
-
-
+##clip target 
+ bedtools intersect -s -wa -a filtered_epd.bed -b IGF2BP3_clip_rep1.bed | sort | uniq > rep1_intersect.bed
+ bedtools intersect -s -wa -a filtered_epd.bed -b IGF2BP3_clip_rep2.bed | sort | uniq > rep2_intersect.bed
+intersectBed -s -wa -a rep1_intersect.bed -b rep2_intersect.bed > filtered_promoter_bp3_target.bed
