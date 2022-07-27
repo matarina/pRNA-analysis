@@ -9,7 +9,7 @@ parallel --xapply trim_galore --phred33 -q 20 -j 17 --paired  --length 20 -o ~/p
 trim_galore --phred33 -q 20 -j 18 --length 20 -o ~/trimmed_data/ ~/prna/293T_wuq/SRR8571185.fastq.gz 
 #hisat2比对
 Time loading forward index: 00:06:26
-hisat2 --dta -t -x ~/hisat2_index/grch38/genome -U ~/trimmed_data/SRR8571185_trimmed.fq.gz -S ~/mapped_result/SRR8571185.sam -p 16 --rna-strandness R
+hisat2 -t -x ~/hisat2_index/grch38/genome -U ~/trimmed_data/SRR8571185_trimmed.fq.gz -S ~/mapped_result/SRR8571185.sam -p 16 --rna-strandness R
 
 #sam排序转bam
 samtools sort -o ~/mapped_result/SRR8571187sorted.bam -O bam -@ 12 ~/mapped_result/SRR8571185.sam
