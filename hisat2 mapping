@@ -126,3 +126,6 @@ check_strandedness -g ~/genomereference/genecode/gencode.v40.annotation.gtf --tr
 ## bowtie align do not support .gz file
 bowtie ~/index/bowtieindex/bowtie1_hg38/hg38 --threads 18 -v 2 -m 10 -q --best --strata  -S SRR2830597_trimmed.fq | samtools sort -O bam -@ 8 - > SRR2830597.sorted.bam
 
+### 
+samtools view -bS $_.sam > $_.bam
+samtools sort -o $_.sorted.bam $_.bam
