@@ -114,7 +114,7 @@ faidx hg38.fa -i chromsizes > sizes.genome ###get genome size
 bedtools flank  -i human_epd_tss_represent.bed -g sizes.genome -l 1000 -r 0 -s  > epd_promoter.bed  ## from tss to 1000bp promoter region
 awk '$3 == "CDS" {print $0}' hg38.knownGene.gtf  > hg38_knowngene_CDS.gtf ### get cds region from gtf
 bedtools intersect -s -wa -v -a epd_promoter2.bed -b hg38_knowngene_CDS.bed lncipedia_5_2_hg38.bed | wc -l ##get filtered promoter region 
-                                                                                                           ##(lnc rna bed file source LNCipedia version 5.2 hg38.bed)
+ ##(lnc rna bed file source LNCipedia version 5.2\full dataset\ hg38.bed 没有排除可能的蛋白质编码基因版本)
 
 ##clip target 
  bedtools intersect -s -wa -a filtered_epd.bed -b IGF2BP3_clip_rep1.bed | sort | uniq > rep1_intersect.bed
