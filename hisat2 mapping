@@ -155,3 +155,5 @@ samtools sort -o $_.sorted.bam $_.bam
         mv ${sample_name}_fastq.2.gz ${sample_name}_2.fastq.gz
         """
     }
+### bowtie align before parclip with wavClusterR
+bowtie ~/index/bowtieindex/bowtie1_hg38/hg38 --threads 18 -v 2 -m 10 -q --best --strata  -S ~/new/PARpipe/data/trimmed/SRR944648_trimmed.fq > SRR944648.sam
