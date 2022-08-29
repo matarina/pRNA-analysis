@@ -157,3 +157,7 @@ samtools sort -o $_.sorted.bam $_.bam
     }
 ### bowtie align before parclip with wavClusterR
 bowtie ~/index/bowtieindex/bowtie1_hg38/hg38 --threads 18 -v 2 -m 10 -q --best --strata  -S ~/new/PARpipe/data/trimmed/SRR944648_trimmed.fq > SRR944648.sam
+#提取文本“chr16_GL383556v1_alt”开头的行并删除
+awk '/^chr16_GL383556v1_alt/ { next }{printf "%s\n",$0}' up1000down0promoter.bed >up1000down0promoter.bed
+#pip临时指定源
+pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
