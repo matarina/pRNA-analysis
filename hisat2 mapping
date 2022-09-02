@@ -161,3 +161,8 @@ bowtie ~/index/bowtieindex/bowtie1_hg38/hg38 --threads 18 -v 2 -m 10 -q --best -
 awk '/^chr16_GL383556v1_alt/ { next }{printf "%s\n",$0}' up1000down0promoter.bed >up1000down0promoter.bed
 #pip临时指定源
 pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+##get chromesome size
+library(GenomicDistributionsData)
+chrosize = chromSizes_hg38(metadata=FALSE)
+write.table(chrosize,"H:/chrosize.txt",col.names = FALSE,quote = FALSE)
