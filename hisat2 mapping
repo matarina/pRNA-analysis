@@ -162,7 +162,10 @@ awk '/^chr16_GL383556v1_alt/ { next }{printf "%s\n",$0}' up1000down0promoter.bed
 #pip临时指定源
 pip3 install numpy -i https://pypi.tuna.tsinghua.edu.cn/simple
 
-##get chromesome size
+##get chromesome size（R）
 library(GenomicDistributionsData)
 chrosize = chromSizes_hg38(metadata=FALSE)
 write.table(chrosize,"H:/chrosize.txt",col.names = FALSE,quote = FALSE)
+##get chromesome size （command line）
+samtools faidx genome.fa
+cut -f 1,2 genome.fa.fai > chrom.sizes
