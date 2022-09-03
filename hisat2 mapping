@@ -169,3 +169,6 @@ write.table(chrosize,"H:/chrosize.txt",col.names = FALSE,quote = FALSE)
 ##get chromesome size （command line）
 samtools faidx genome.fa
 cut -f 1,2 genome.fa.fai > chrom.sizes
+
+### awk compare two file ouput different content
+awk  '{if(ARGIND==1) {val[$0]}else{if($0 in val)  delete val[$0]}}END{for(i in val) print i}' mrna_cds_mask.bed mrna_cds_lnc_mask.bed
