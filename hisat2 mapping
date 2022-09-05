@@ -96,7 +96,7 @@ awk '{if($3=="transcript" && $20=="\"protein_coding\";"){print $0}}' gencode.gtf
 
 ##EPD promoter_annotation 
 bedtools flank -i xx.bed -g chromesize -l 1000 -r 0
-bedtools intersect -a epd_promoter.bed -b cds.bed -v -s > filtered.bed
+bedtools intersect -f 0.01 -wa -v -s -a epd_promoter.bed -b cds.bed lncpedia.bed | sort | uniq > filtered.bed
 
 ##提取promoter反义链的注释
 grep '\-$' epd_promoter.bed > minus_epd_promoter.bed
