@@ -172,3 +172,12 @@ cut -f 1,2 genome.fa.fai > chrom.sizes
 
 ### awk compare two file ouput different content
 awk  '{if(ARGIND==1) {val[$0]}else{if($0 in val)  delete val[$0]}}END{for(i in val) print i}' mrna_cds_mask.bed mrna_cds_lnc_mask.bed
+
+
+### get bidirectional promoter from epd human mrna promoter tss site
+bedtools closest -id -S -D a  -a human_epdnew_qwc4O.bed -b human_epdnew_qwc4O.bed|uniq> closed.bed
+#-id ignore downstream feature
+# -S on the opposite strand
+# -D get distance with orentation method "a"
+
+
