@@ -1,8 +1,8 @@
 wrdir <- ("~/test/DecayAnalysis/Example analysis results 1")
 if(!file.exists(wrdir)) dir.create(wrdir, recursive = TRUE)
-treatment <- c("hepg2", "sham")
-reps <- c("r1", "r2")
-tdecay <- c("00", "60", "180", "360")
+treatment <- c("hepg2", "sham")    #### treatment
+reps <- c("r1", "r2")         ####replicate
+tdecay <- c("00", "60", "180", "360")               ###time point
 mean_RPM <- data.frame("geneID" = rownames(RPMs))
 SE_RPM <- data.frame("geneID" = rownames(RPMs))
 for(g in treatment){
@@ -46,7 +46,7 @@ write.table(x = SE_mT0norm, file = paste0(wrdir, "/T0 normalized_SE.txt"),  sep 
 
 stablegenes = c(
 "ERCC-00002",
-"ERCC-00003")
+"ERCC-00003")            #### diy stable genes
 
 stabletable <- mean_mT0norm[stablegenes, ]
 normFactors <- colMeans(stabletable)
@@ -54,7 +54,7 @@ write.table(x <- normFactors, paste0(wrdir, "/Normalziation Decay Factors.txt"),
 normFactors_mean <- matrix(normFactors, nrow = length(tdecay))
 normFactors_SE <- matrix(apply(X = stabletable, MARGIN = 2, function(x) stats::sd(x)/sqrt(length(stablegenes))), nrow = length(tdecay))
 
-t.decay <- c(0, 60, 180, 360)    #####diy
+t.decay <- c(0, 60, 180, 360)    #####diy time point
 
 rownames(normFactors_mean) <- t.decay
 rownames(normFactors_SE) <- t.decay
