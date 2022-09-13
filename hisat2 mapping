@@ -181,3 +181,13 @@ bedtools closest -id -S -D a  -a human_epdnew_qwc4O.bed -b human_epdnew_qwc4O.be
 # -D get distance with orentation method "a"
 
 
+
+
+
+### how to get prna annotation gtf file
+### filter sense prna bed file , cds bed file is downloaded from ucsc table browser
+bedtools intersect  -f 0.01 -wa -v  -s -a mrna_promoter_unmask.bed -b lncipedia_5_2_hg38.bed genecode40_cds.bed |sort | uniq > sense_prna.bed
+### get antisense prna from sense prooter bed file
+sed 's/\t+$/\t--/ ;s/\t-$/\t+/ ;s/\t--$/\t-/' mrna_promoter_unmask.bed > antisense_unmask.bed
+### filter antisense prna bed file 
+bedtools intersect  -f 0.01 -wa -v  -s -a antisense_unmask.bed -b lncipedia_5_2_hg38.bed genecode40_cds.bed |sort | uniq > antisense_prna.bed
