@@ -191,3 +191,5 @@ bedtools intersect  -f 0.01 -wa -v  -s -a mrna_promoter_unmask.bed -b lncipedia_
 sed 's/\t+$/\t--/ ;s/\t-$/\t+/ ;s/\t--$/\t-/' mrna_promoter_unmask.bed > antisense_unmask.bed
 ### filter antisense prna bed file 
 bedtools intersect  -f 0.01 -wa -v  -s -a antisense_unmask.bed -b lncipedia_5_2_hg38.bed genecode40_cds.bed |sort | uniq > antisense_prna.bed
+## filter most upstream tss as promoter rna
+bedtools intersect -s -v -f 0.02  -wa -a antisense_most_distal_epd_promoter.bed -b ncbi_ref_mrna.bed lncipedia_5_2_hg38.bed | sort | uniq > pasrna.bed
