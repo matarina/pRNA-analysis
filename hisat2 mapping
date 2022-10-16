@@ -196,3 +196,6 @@ bedtools intersect -s -v -f 0.02  -wa -a antisense_most_distal_epd_promoter.bed 
 
 sed 's/gene/exon/' ERCC92.gtf > ERCC93.gtf
 cat protein_coding.gtf ERCC93.gtf > protein_ercc.gtf
+
+### add strandness title on prna bed file
+awk '{ gsub("^", "pas_", $4) }1' pas.bed
