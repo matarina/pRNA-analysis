@@ -199,3 +199,12 @@ cat protein_coding.gtf ERCC93.gtf > protein_ercc.gtf
 
 ### add strandness title on prna bed file
 awk '{ gsub("^", "pas_", $4) }1' pas.bed
+
+## sort and remove duplication
+for i in `grep SRR srr_acc_list.txt`
+do
+echo ${i}
+sambamba view -S -t 10 -f bam -o ${i}.bam ${i}.sam
+sambamba sort  -t 10 -m 8G -o ${i}.sort.bam ${i}.bam
+sambamba markdup  -t 10 -r ${i}.sort.bam ${i}.sort.deduplicated.bam
+done
