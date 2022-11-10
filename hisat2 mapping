@@ -208,3 +208,14 @@ sambamba view -S -t 10 -f bam -o ${i}.bam ${i}.sam
 sambamba sort  -t 10 -m 8G -o ${i}.sort.bam ${i}.bam
 sambamba markdup  -t 10 -r ${i}.sort.bam ${i}.sort.deduplicated.bam
 done
+
+
+
+
+#### merge feature count output in bash
+ls -1  *.count | parallel 'cat {} | sed '1d' | cut -f7 {} > {/.}_clean.txt'
+ls -1  *.count | head -1 | xargs cut -f1 > genes.txt
+paste genes.txt *_clean.txt > output.txt
+
+
+
