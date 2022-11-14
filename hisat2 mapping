@@ -226,3 +226,6 @@ conda activate py31
 
 ### match gene id and gene type
 cat gencode.v40.annotation.gtf |awk -F'\t' '{match($9,/gene_id "([^"]+)"/,g);match($9,/gene_type "([^"]+)"/,n);print g[1]"\t"n[1]}'  | head
+
+### picard mark and remove duplicates
+java -Xmx3g -jar ~/source_software/picard.jar MarkDuplicates I=SRR10822547Aligned.sortedByCoord.out.bam O=SRR10822547.deduplicated.bam METRICS_FILE=matrics.txt REMOVE_DUPLICATES=true
