@@ -3,10 +3,10 @@
 axel -n 100 --
 fasterq-dump SRR* -O ./ -e 10 -p 
 #质检及批处理脚本
-for i in *fastq ;do echo "nohup trim_galore --phred33 -q 20 -j 2 --length 20 -o ~/prna_transcript_analysis/trimmed_data/293T_wuq/ ~/prna_transcript_analysis/prna_source_data/293T_wuq/$i.fastq & " | bash;done
+for i in *fastq ;do echo "nohup trim_galore --phred33 -q 20 -j 2 --stringency 3 --length 20 -o ~/prna_transcript_analysis/trimmed_data/293T_wuq/ ~/prna_transcript_analysis/prna_source_data/293T_wuq/$i.fastq & " | bash;done
 #双端测序平行处理
-parallel --xapply trim_galore --phred33 -q 20 -j 17 --paired  --length 20 -o ~/prna_merip_data_analysis/trimmed_data/hela/input/ ::: *_1.fastq.gz ::: *_2.fastq.gz
-trim_galore --phred33 -q 20 -j 18 --length 20 -o ~/trimmed_data/ ~/prna/293T_wuq/SRR8571185.fastq.gz 
+parallel --xapply trim_galore --phred33 -q 20 -j 17 --stringency 3 --paired  --length 20 -o ~/prna_merip_data_analysis/trimmed_data/hela/input/ ::: *_1.fastq.gz ::: *_2.fastq.gz
+trim_galore --phred33 -q 20 -j 18 --stringency 3 --length 20 -o ~/trimmed_data/ ~/prna/293T_wuq/SRR8571185.fastq.gz 
 #hisat2比对
 Time loading forward index: 00:06:26
 hisat2 -t -x ~/index/hisat2_index/ucsc_hg38/genome -U ~/trimmed_data/SRR8571185_trimmed.fq.gz -S ~/mapped_result/SRR8571185.sam -p 16 --rna-strandness R
