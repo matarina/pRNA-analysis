@@ -219,7 +219,7 @@ paste genes.txt *_clean.txt > output.txt
 
 
 ### use conda activate in bash script with nohup
-eval "$(conda shell.bash hook)"
+source /home/ma/miniconda3/etc/profile.d/conda.sh
 conda activate py31
 
 
