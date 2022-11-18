@@ -229,3 +229,16 @@ cat gencode.v40.annotation.gtf |awk -F'\t' '{match($9,/gene_id "([^"]+)"/,g);mat
 
 ### picard mark and remove duplicates      xmx: maxmum memory limit
 java -Xmx3g -jar ~/source_software/picard.jar MarkDuplicates I=SRR10822547Aligned.sortedByCoord.out.bam O=SRR10822547.deduplicated.bam METRICS_FILE=matrics.txt REMOVE_DUPLICATES=true
+
+
+
+###use proxy in R studio
+install.packages("r.proxy")
+library(r.proxy)
+r.proxy::proxy() # on
+r.proxy::noproxy() # off
+
+
+
+
+
