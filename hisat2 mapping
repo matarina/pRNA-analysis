@@ -238,7 +238,23 @@ library(r.proxy)
 r.proxy::proxy() # on
 r.proxy::noproxy() # off
 
+####################downlaod sra file use ascp with loop
+#! /bin/sh
 
+VAR1=`grep SRR srr.txt`
+VAR2=`grep -P -o '\d{2}$' srr.txt`
 
+fun()
+{
+    set $VAR2
+    for i in $VAR1; do
+        echo  "$i" "$1"
+         ascp -QT -l 300m -P 33001 -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh era-fasp@fasp.sra.ebi.ac.uk:/vol1/fastq/SRR145/0${1}/${i}/${i}_1.fastq.gz ./
+        ascp -QT -l 300m -P 33001 -i ~/.aspera/connect/etc/asperaweb_id_dsa.openssh era-fasp@fasp.sra.ebi.ac.uk:/vol1/fastq/SRR145/0${1}/${i}/${i}_2.fastq.gz ./
+        shift
+    done
+}
 
+fun
+################
 
