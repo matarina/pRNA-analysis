@@ -258,3 +258,4 @@ fun()
 fun
 ################
 
+bowtie2 -p 18 --norc --sensitive --no-unal -1 SRR10822599_1_val_1.fq.gz -2 SRR10822599_2_val_2.fq.gz --un-conc-gz SRR10822599_bowtie_norna_%.fastq.gz -x ~/index/bowtieindex/bowtie2_rrna_index/hg38_rRNA -S test.sam
