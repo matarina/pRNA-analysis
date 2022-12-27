@@ -259,3 +259,27 @@ fun
 ################
 
 bowtie2 -p 18 --norc --sensitive --no-unal -1 SRR10822599_1_val_1.fq.gz -2 SRR10822599_2_val_2.fq.gz --un-conc-gz SRR10822599_bowtie_norna_%.fastq.gz -x ~/index/bowtieindex/bowtie2_rrna_index/hg38_rRNA -S test.sam
+
+
+
+
+
+
+#### merge featurecount output data
+import glob
+import numpy as np
+import matplotlib.pyplot
+import pandas as pd
+file_list = glob.glob('*.count')
+file_list.sort()
+genes = pd.read_csv(file_list[1], delimiter='\s+', header=None,skiprows=2, usecols=[0])
+dataFrames = []
+cols = [6]
+for f in file_list:
+    df = pd.read_csv(f, delimiter='\s+', header=None,skiprows=2, usecols=cols).set_axis([f.split('.')[0]],axis='columns')
+    dataFrames.append(df)
+newdf = pd.concat(dataFrames,axis=1)
+newdf.insert(0, "geneid", genes, True)
+newdf.to_csv('genes_count.csv',index=False,header=True)
+###
+
