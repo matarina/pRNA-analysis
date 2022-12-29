@@ -283,3 +283,9 @@ newdf.insert(0, "geneid", genes, True)
 newdf.to_csv('genes_count.csv',index=False,header=True)
 ###
 
+
+
+### rrna proportion assess
+python2.7 split_bam.py -i Pairend_StrandSpecific_51mer_Human_hg19.bam -r hg19.rRNA.bed -o output
+
+
