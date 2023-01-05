@@ -289,3 +289,6 @@ newdf.to_csv('genes_count.csv',index=False,header=True)
 python2.7 split_bam.py -i Pairend_StrandSpecific_51mer_Human_hg19.bam -r hg19.rRNA.bed -o output
 
 
+## clash proxy on and off
+export ALL_PROXY=socks5://127.0.0.1:7891
+unset ALL_PROXY
