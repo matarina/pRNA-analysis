@@ -1,1 +1,60 @@
 
+###get most upstream tss from epd database downloaded all tss bed file 
+
+library(tidyr)
+library(dplyr)
+##read raw tss loci bed file downloaded from EPD
+raw_tss = read.table("~/annotationg/human_epdnew_7cS15.bed",sep = '\t',header = FALSE)
+raw_tss = separate(raw_tss,V4,into = c("ID","sub"),sep = '_')
+minus_tss = raw_tss[grep("\\-",raw_tss$V6),]
+plus_tss = raw_tss[grep("\\+",raw_tss$V6),]
+
+distal_plus = plus_tss %>% 
+  group_by(ID) %>% 
+  filter(V3 == min(V3)) %>% 
+  ungroup()
+distal_plus$idv = paste(distal_plus$ID,distal_plus$sub,sep = "_")
+distal_plus= distal_plus[,c(1,2,3,8,6,7)]
+
+distal_minus = minus_tss %>% 
+  group_by(ID) %>% 
+  filter(V3 == max(V3)) %>% 
+  ungroup()
+distal_minus$idv = paste(distal_minus$ID,distal_minus$sub,sep = "_")
+distal_minus= distal_minus[,c(1,2,3,8,6,7)]
+##both TXNIP_1 and TXNIP_2 have same TSS site, manually remove one
+distal_minus = distal_minus %>% filter(idv != 'TXNIP_2')
+most_distal = rbind(distal_plus,distal_minus)
+write.table(most_distal,"~/annotationg/most_distal_tss.bed",sep = '\t',col.names = FALSE,row.names = FALSE,quote = FALSE)
+
+
+##to linux
+#get genecode v28 annotation gtf file from genecode database
+#wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_28/gencode.v28.annotation.gtf.gz
+#faidx hg38.fa -i chromsizes > sizes.genome ###get genome size 
+#get trascript support level 1 protein coding region loci as referred by EPD human promoterdocument
+#grep 'gene_type "protein_coding"' gencode.v28.annotation.gtf | grep 'transcript_support_level "1"' > transcript_support_level_1.bed
+annotation=./most_distal_tss.bed
+echo $annotation
+awk '$6 ~ "-"{print $0}' $annotation > minus_strand.bed
+awk '$6 ~ "+"{print $0}' $annotation > plus_strand.bed
+bedtools flank -i plus_strand.bed -g sizes.genome -l 1000 -r 0 > plus_flank.bed
+bedtools flank -i minus_strand.bed -g sizes.genome -l 0 -r 1000 > minus_flank.bed
+cat plus_flank.bed minus_flank.bed > flank.bed
+sort -k 1,1 -k2,2n flank.bed > psrna_sorted.bed
+sed 's/\t+$/\t--/ ;s/\t-$/\t+/ ;s/\t--$/\t-/' psrna_sorted.bed > pasrna.bed
+sort -k 1,1 -k2,2n pasrna.bed > pasrna_sorted.bed
+bedtools subtract -s -a psrna_sorted.bed -b transcript_support_level_1.bed > psrna_2.bed
+bedtools subtract -s -a pasrna_sorted.bed -b transcript_support_level_1.bed > pasrna_2.bed
+
+#to R
+psrna_2 = read.csv('~/annotationg/psrna_2.bed',sep = '\t',header = FALSE)
+pasrna_2 = read.csv('~/annotationg/pasrna_2.bed',sep = '\t',header = FALSE)
+psrna_2 $length = psrna_2$V3 - psrna_2$V2
+pasrna_2 $length = pasrna_2$V3 - pasrna_2$V2
+ps = psrna_2 %>% filter(length > 200) %>% select(!(length))
+pas = pasrna_2 %>% filter(length > 200) %>% select(!(length))
+
+
+
+
