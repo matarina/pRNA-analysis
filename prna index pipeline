@@ -56,5 +56,10 @@ ps = psrna_2 %>% filter(length > 200) %>% select(!(length))
 pas = pasrna_2 %>% filter(length > 200) %>% select(!(length))
 
 
-
-
+#get distance between h2h tss
+sort -k 1,1 -k2,2n most_distal_tss.bed > most_distal_tss_sort.bed
+bedtools closest -S -D a  -a most_distal_tss_sort.bed -b most_distal_tss_sort.bed|uniq> closed.text
+#
+bidirection = read.csv("H:/closed.text",header = FALSE,sep = '\t')
+keep_bi = bidirection[abs(bidirection$V13) <= 1000,]
+keep_index = unique(keep_bi$V4,keep_bi$V10)
