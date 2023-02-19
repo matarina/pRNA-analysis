@@ -34,7 +34,8 @@ write.table(most_distal,"~/annotationg/most_distal_tss.bed",sep = '\t',col.names
 #faidx hg38.fa -i chromsizes > sizes.genome ###get genome size 
 #get trascript support level 1 protein coding region loci as referred by EPD human promoterdocument
 #grep 'gene_type "protein_coding"' gencode.v28.annotation.gtf | grep 'transcript_support_level "1"' > transcript_support_level_1.bed
-annotation=./most_distal_tss.bed
+sort -k 1,1 -k2,2n most_distal_tss.bed > most_distal_tss_sort.bed
+annotation=./most_distal_tss_sort.bed
 echo $annotation
 awk '$6 ~ "-"{print $0}' $annotation > minus_strand.bed
 awk '$6 ~ "+"{print $0}' $annotation > plus_strand.bed
@@ -57,9 +58,12 @@ pas = pasrna_2 %>% filter(length > 200) %>% select(!(length))
 
 
 #get distance between h2h tss
-sort -k 1,1 -k2,2n most_distal_tss.bed > most_distal_tss_sort.bed
 bedtools closest -S -D a  -a most_distal_tss_sort.bed -b most_distal_tss_sort.bed|uniq> closed.text
 #
-bidirection = read.csv("H:/closed.text",header = FALSE,sep = '\t')
+bidirection = read.csv("~/annotationg/closed.text",header = FALSE,sep = '\t')
 keep_bi = bidirection[abs(bidirection$V13) <= 1000,]
 keep_index = unique(keep_bi$V4,keep_bi$V10)
+ps = ps[!(ps$V4 %in% keep_index),]
+pas = pas[!(pas$V4 %in% keep_index),]
+write.table(ps,"~/annotationg/ps.bed",sep = '\t',col.names = FALSE,row.names = FALSE,quote = FALSE)
+write.table(pas,"~/annotationg/pas.bed",sep = '\t',col.names = FALSE,row.names = FALSE,quote = FALSE)
