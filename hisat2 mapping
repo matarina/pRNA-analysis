@@ -292,3 +292,23 @@ python2.7 split_bam.py -i Pairend_StrandSpecific_51mer_Human_hg19.bam -r hg19.rR
 ## clash proxy on and off
 export ALL_PROXY=socks5://127.0.0.1:7891
 unset ALL_PROXY
+
+
+
+##omicselector plot valid roc curve
+
+getwd()
+pred_y = predict(bestmodel, valid, type="prob")[,"Case"]
+pred = predict(bestmodel, valid)
+caret::confusionMatrix(pred, valid$Class, positive = "Case")
+validroc = pROC::roc(valid$Class ~ pred_y)
+pROC::ci(validroc)
+print(validroc)
+ ggroc(validroc,legacy.axes = TRUE)+ theme_bw()+
+   theme(panel.grid = element_blank(),
+         legend.background = element_rect(linetype = 1, size = 0.2, colour = "black"),
+         legend.position = c(0.765,0.125))+geom_abline(intercept = 0, slope = 1,
+                color = "darkgrey", linetype = "dashed")+
+     labs(x = "1-Specificity",
+          y = "Sensitivity")
+#ggsave("cirrhosis_valid_roc.pdf",plot = p,width = 2.7,height =2.65,units = 'in')
