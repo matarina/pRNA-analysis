@@ -312,3 +312,26 @@ print(validroc)
      labs(x = "1-Specificity",
           y = "Sensitivity")
 #ggsave("cirrhosis_valid_roc.pdf",plot = p,width = 2.7,height =2.65,units = 'in')
+
+
+
+
+model_file = paste0("models/",model_results[9,"ID"],".RDS");
+    model_results[9,]
+    print(model_file)
+    bestmodel = readRDS(model_file)
+pred_y = predict(bestmodel, valid, type="prob")[,"Case"]
+pred = predict(bestmodel, valid)
+caret::confusionMatrix(pred, valid$Class, positive = "Case")
+validroc = pROC::roc(valid$Class ~ pred_y)
+auc(validroc)
+pROC::ci(validroc)
+ggroc(validroc,legacy.axes =TRUE, colour = "red")+
+geom_segment(aes(x = 0, xend = 1, y = 0, yend = 1), color="grey", linetype="dashed")+theme_bw()+
+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank())
+p =ggroc(validroc,legacy.axes =TRUE, colour = "red")+
+geom_segment(aes(x = 0, xend = 1, y = 0, yend = 1), color="grey", linetype="dashed")+theme_bw()+
+theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank())
+
+ggsave("cirrhosis2_roc.pdf",p,width = 2.7,height =2.62,units = 'in')      
+
