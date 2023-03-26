@@ -304,7 +304,7 @@ caret::confusionMatrix(pred, valid$Class, positive = "Case")
 validroc = pROC::roc(valid$Class ~ pred_y)
 pROC::ci(validroc)
 print(validroc)
- ggroc(validroc,legacy.axes = TRUE)+ theme_bw()+
+ ggroc(validroc,legacy.axes = TRUE,color = 'red')+ theme_bw()+
    theme(panel.grid = element_blank(),
          legend.background = element_rect(linetype = 1, size = 0.2, colour = "black"),
          legend.position = c(0.765,0.125))+geom_abline(intercept = 0, slope = 1,
