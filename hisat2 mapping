@@ -313,8 +313,8 @@ print(validroc)
           y = "Sensitivity")
 #ggsave("cirrhosis_valid_roc.pdf",plot = p,width = 2.7,height =2.65,units = 'in')
 
-
-
+##strinttie assemble transcript
+stringtie ../SRR8131644.sort.bam ../SRR8131645.sort.bam -G gencode.v43.chr_patch_hapl_scaff.annotation.gtf --rf -o ./assemble.gtf -v
 
 
 
